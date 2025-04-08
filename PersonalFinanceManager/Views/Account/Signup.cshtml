@@ -1,0 +1,317 @@
+﻿@model SignupViewModel;
+@{
+	ViewData["Title"] = "Register";
+}
+
+<div class="bg-[#DFDFDF] min-h-screen flex justify-center items-center relative overflow-hidden p-4">
+	<div id="final-screen" class="w-full max-w-6xl">
+		<div class="bg-gray-50 rounded-xl shadow-lg overflow-hidden">
+			<form class="mt-6" asp-controller="Account" asp-action="Signup" method="post" enctype="multipart/form-data">
+				<input type="hidden" asp-for="RegistrationDate" />
+				<input type="hidden" asp-for="IsActive" value="true" />
+
+				<div class="md:flex">
+					<!-- Left side with form fields -->
+					<div class="w-full md:w-1/2 py-12 px-6 sm:px-12">
+						<div class="text-center mb-8">
+							<img class="mx-auto h-12 w-auto" src="~/images/logo.jpg" alt="Logo">
+							<h2 class="mt-6 text-3xl font-extrabold text-gray-900">
+								Create your account
+							</h2>
+							<p class="mt-2 text-sm text-gray-600">
+								Already have an account?
+								<a asp-controller="Account" asp-action="Signin" class="font-medium text-indigo-600 hover:text-indigo-500">
+									Sign in here
+								</a>
+							</p>
+						</div>
+
+						<!-- Profile Picture Upload -->
+						<div class="mb-8 text-center">
+							<div class="mx-auto w-32 h-32 relative">
+								<img id="profile-preview" class="w-full h-full rounded-full object-cover border-4 border-white shadow-md"
+									 src="https://via.placeholder.com/150" alt="Profile preview">
+								<label for="ProfilePicture" class="absolute bottom-0 right-0 bg-indigo-600 text-white rounded-full p-2 cursor-pointer shadow-lg hover:bg-indigo-700 transition">
+									<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+										<path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+									</svg>
+									<input id="ProfilePicture" name="ProfilePicture" type="file" accept="image/*" class="hidden"
+										   onchange="document.getElementById('profile-preview').src = window.URL.createObjectURL(this.files[0])">
+								</label>
+							</div>
+							<span asp-validation-for="ProfilePicture" class="text-red-500 text-xs"></span>
+						</div>
+
+						<!-- Personal Information Section -->
+						<div class="mb-8">
+							<h3 class="text-lg font-medium text-gray-900 mb-4">Personal Information</h3>
+							<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+								<!-- First Name -->
+								<div>
+									<label asp-for="FirstName" class="block text-sm font-medium text-gray-700 mb-1"></label>
+									<input asp-for="FirstName" type="text" required
+										   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+										   placeholder="John">
+									<span asp-validation-for="FirstName" class="text-red-500 text-xs"></span>
+								</div>
+
+								<!-- Last Name -->
+								<div>
+									<label asp-for="LastName" class="block text-sm font-medium text-gray-700 mb-1"></label>
+									<input asp-for="LastName" type="text" required
+										   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+										   placeholder="Doe">
+									<span asp-validation-for="LastName" class="text-red-500 text-xs"></span>
+								</div>
+
+								<!-- Date of Birth -->
+								<div>
+									<label asp-for="DateOfBirth" class="block text-sm font-medium text-gray-700 mb-1"></label>
+									<input asp-for="DateOfBirth" type="date"
+										   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+									<span asp-validation-for="DateOfBirth" class="text-red-500 text-xs"></span>
+								</div>
+
+								<!-- Phone Number -->
+								<div>
+									<label asp-for="PhoneNumber" class="block text-sm font-medium text-gray-700 mb-1"></label>
+									<input asp-for="PhoneNumber" type="tel"
+										   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+										   placeholder="+1 (555) 123-4567">
+									<span asp-validation-for="PhoneNumber" class="text-red-500 text-xs"></span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Account Information Section -->
+						<div class="mb-8">
+							<h3 class="text-lg font-medium text-gray-900 mb-4">Account Information</h3>
+							<div class="grid grid-cols-1 gap-4">
+								<!-- Email -->
+								<div>
+									<label asp-for="Email" class="block text-sm font-medium text-gray-700 mb-1"></label>
+									<input asp-for="Email" type="email" required
+										   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+										   placeholder="you@example.com">
+									<span asp-validation-for="Email" class="text-red-500 text-xs"></span>
+								</div>
+
+								<!-- Password -->
+								<div>
+									<label asp-for="Password" class="block text-sm font-medium text-gray-700 mb-1"></label>
+									<input asp-for="Password" type="password" required
+										   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+										   placeholder="••••••••">
+									<span asp-validation-for="Password" class="text-red-500 text-xs"></span>
+								</div>
+
+								<!-- Confirm Password -->
+								<div>
+									<label asp-for="ConfirmPassword" class="block text-sm font-medium text-gray-700 mb-1"></label>
+									<input asp-for="ConfirmPassword" type="password" required
+										   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+										   placeholder="••••••••">
+									<span asp-validation-for="ConfirmPassword" class="text-red-500 text-xs"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Right side with additional form fields -->
+					<div class="w-full md:w-1/2 py-12 px-6 sm:px-12 bg-gray-100">
+						<!-- Additional Information Section -->
+						<div class="mb-8">
+							<h3 class="text-lg font-medium text-gray-900 mb-4">Additional Information</h3>
+							<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+								<!-- Address -->
+								<div class="md:col-span-2">
+									<label asp-for="Address" class="block text-sm font-medium text-gray-700 mb-1"></label>
+									<input asp-for="Address" type="text"
+										   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+										   placeholder="123 Main St">
+									<span asp-validation-for="Address" class="text-red-500 text-xs"></span>
+								</div>
+
+								<!-- City -->
+								<div>
+									<label asp-for="City" class="block text-sm font-medium text-gray-700 mb-1"></label>
+									<input asp-for="City" type="text"
+										   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+										   placeholder="New York">
+									<span asp-validation-for="City" class="text-red-500 text-xs"></span>
+								</div>
+
+								<!-- State/Province -->
+								<div>
+									<label asp-for="State" class="block text-sm font-medium text-gray-700 mb-1"></label>
+									<input asp-for="State" type="text"
+										   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+										   placeholder="NY">
+									<span asp-validation-for="State" class="text-red-500 text-xs"></span>
+								</div>
+
+								<!-- Postal Code -->
+								<div>
+									<label asp-for="PostalCode" class="block text-sm font-medium text-gray-700 mb-1"></label>
+									<input asp-for="PostalCode" type="text"
+										   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+										   placeholder="10001">
+									<span asp-validation-for="PostalCode" class="text-red-500 text-xs"></span>
+								</div>
+
+								<!-- Country -->
+								<div>
+									<label asp-for="Country" class="block text-sm font-medium text-gray-700 mb-1"></label>
+									<select asp-for="Country"
+											class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+										<option value="">Select Country</option>
+										<option value="US">United States</option>
+										<option value="CA">Canada</option>
+										<option value="UK">United Kingdom</option>
+									</select>
+									<span asp-validation-for="Country" class="text-red-500 text-xs"></span>
+								</div>
+
+								<!-- Currency Preference -->
+								<div>
+									<label asp-for="CurrencyPreference" class="block text-sm font-medium text-gray-700 mb-1"></label>
+									<select asp-for="CurrencyPreference"
+											class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+										<option value="USD">USD ($)</option>
+										<option value="EUR">EUR (€)</option>
+										<option value="GBP">GBP (£)</option>
+										<option value="JPY">JPY (¥)</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<!-- Preferences Section -->
+						<div class="mb-8">
+							<h3 class="text-lg font-medium text-gray-900 mb-4">Preferences</h3>
+							<div class="space-y-4">
+								<!-- Monthly Budget Goal -->
+								<div>
+									<label asp-for="MonthlyBudgetGoal" class="block text-sm font-medium text-gray-700 mb-1"></label>
+									<div class="mt-1 relative rounded-md shadow-sm">
+										<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+											<span class="text-gray-500 sm:text-sm">$</span>
+										</div>
+										<input asp-for="MonthlyBudgetGoal" type="number" step="0.01"
+											   class="appearance-none block w-full pl-7 pr-12 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+											   placeholder="0.00">
+										<div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+											<span class="text-gray-500 sm:text-sm" id="price-currency">USD</span>
+										</div>
+									</div>
+								</div>
+
+								<!-- Savings Goal -->
+								<div>
+									<label asp-for="SavingsGoal" class="block text-sm font-medium text-gray-700 mb-1"></label>
+									<div class="mt-1 relative rounded-md shadow-sm">
+										<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+											<span class="text-gray-500 sm:text-sm">$</span>
+										</div>
+										<input asp-for="SavingsGoal" type="number" step="0.01"
+											   class="appearance-none block w-full pl-7 pr-12 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+											   placeholder="0.00">
+										<div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+											<span class="text-gray-500 sm:text-sm">USD</span>
+										</div>
+									</div>
+								</div>
+
+								<!-- Notification Preferences -->
+								<div>
+									<label asp-for="NotificationPreferences" class="block text-sm font-medium text-gray-700 mb-1"></label>
+									<select asp-for="NotificationPreferences"
+											class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+										<option value="Email">Email Notifications</option>
+										<option value="SMS">SMS Notifications</option>
+										<option value="Both">Both Email and SMS</option>
+										<option value="None">No Notifications</option>
+									</select>
+								</div>
+
+								<!-- Checkboxes -->
+								<div class="space-y-2">
+									<div class="flex items-center">
+										<input asp-for="IsTwoFactorEnabled" type="checkbox"
+											   class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+										<label asp-for="IsTwoFactorEnabled" class="ml-2 block text-sm text-gray-700"></label>
+									</div>
+
+									<div class="flex items-center">
+										<input asp-for="PrefersDarkMode" type="checkbox"
+											   class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+										<label asp-for="PrefersDarkMode" class="ml-2 block text-sm text-gray-700"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Submit Button -->
+						<div class="mt-8">
+							<button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+								Create Account
+							</button>
+						</div>
+					</div>
+				</div> <!-- Closing the md:flex div -->
+			</form> <!-- Properly closed form tag -->
+			<div class="m-6">
+				<div class="relative">
+					<div class="absolute inset-0 flex items-center">
+						<div class="w-full border-t border-gray-300"></div>
+					</div>
+					<div class="relative flex justify-center text-sm">
+						<span class="px-2 bg-gray-50 text-gray-500">
+							Or sign up with
+						</span>
+					</div>
+				</div>
+
+				<div class="mt-6 grid grid-cols-2 gap-3">
+					<div>
+						<a asp-action="ExternalLogin" asp-controller="Account" asp-route-provider="Google"
+						   class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+							<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" />
+							</svg>
+							<span class="ml-2">Google</span>
+						</a>
+					</div>
+
+					<div>
+						<a asp-action="ExternalLogin" asp-controller="Account" asp-route-provider="Facebook"
+						   class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+							<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+								<path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
+							</svg>
+							<span class="ml-2">Facebook</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script>
+		// Update currency symbol when currency preference changes
+		document.getElementById('CurrencyPreference').addEventListener('change', function() {
+			const currencySymbols = {
+				'USD': '$',
+				'EUR': '€',
+				'GBP': '£',
+				'JPY': '¥'
+			};
+			const currency = this.value;
+			document.querySelectorAll('#price-currency').forEach(el => {
+				el.textContent = currency;
+			});
+		});
+	</script>
+}

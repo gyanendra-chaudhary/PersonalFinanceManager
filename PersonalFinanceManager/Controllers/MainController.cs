@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PersonalFinanceManager.Models.Entity;
+using PersonalFinanceManager.Models.ViewModel;
 
 namespace PersonalFinanceManager.Controllers
 {
@@ -16,21 +17,14 @@ namespace PersonalFinanceManager.Controllers
             var user = _httpContextAccessor.HttpContext.User;
             return new AppUser
             {
-                Id =0,
-                UserName = "",
-                FullName = "",
-                Email = "",
-                ProfilePicture = ""
+                Id = Convert.ToInt32(user.FindFirst("Id").Value),
+                UserName = user.FindFirst("UserName").Value,
+                FullName = user.FindFirst("FullName").Value,
+                Email = user.FindFirst("Email").Value,
+                ProfilePicture = user.FindFirst("Email").Value
             };
         }
-        public class AppUser
-        {
-            public int Id { get; set; }
-            public string UserName { get; set; }
-            public string Email { get; set; }
-            public string FullName { get; set; }
-            public string ProfilePicture { get; set; }
-        }
+       
     }
 
 }

@@ -2,10 +2,15 @@
 
 namespace PersonalFinanceManager.Controllers
 {
-    public class UserController : Controller
+    public class UserController : MainController
     {
+        public UserController(IHttpContextAccessor httpContextAccessor):base(httpContextAccessor) 
+        {
+            
+        }
         public IActionResult Index()
         {
+            ViewData["AppUser"] = GetAppUser();
             return View();
         }
     }

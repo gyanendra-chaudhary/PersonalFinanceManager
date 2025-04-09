@@ -11,13 +11,14 @@ namespace PersonalFinanceManager.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor httpContextAccessor):base(httpContextAccessor)
         {
             _logger = logger;
         }
 
         public IActionResult Index()
         {
+            var appUser = GetAppUser();
             return View();
         }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,7 @@ namespace PersonalFinanceManager.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IEmailService _emailSender;
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, IEmailService emailSender)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, IEmailService emailSender, IHttpContextAccessor httpContextAccessor):base(httpContextAccessor)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -39,6 +40,13 @@ namespace PersonalFinanceManager.Controllers
                     var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                     if (result.Succeeded)
                     {
+                        string email = User.FindFirst(ClaimTypes.Email)?.Value;
+                        var user = await _userManager.FindByEmailAsync(email);
+                        await _userManager.AddClaimAsync(user, new Claim("UserId", user.Id));
+                        await _userManager.AddClaimAsync(user, new Claim("FullName", user.FirstName + user.LastName));
+                        await _userManager.AddClaimAsync(user, new Claim("ProfilePicture", user.ProfilePicture.ToString()));
+                        await _userManager.AddClaimAsync(user, new Claim("UserName", user.UserName));
+
                         // Handle successful login
                         return RedirectToAction(nameof(HomeController.Index), "Home");
                     }
@@ -115,6 +123,10 @@ namespace PersonalFinanceManager.Controllers
                     //var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     //await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
                     await _signInManager.SignInAsync(user, isPersistent: false);
+                    await _userManager.AddClaimAsync(user, new Claim("UserId", user.Id));
+                    await _userManager.AddClaimAsync(user, new Claim("FullName", user.FirstName + user.LastName));
+                    await _userManager.AddClaimAsync(user, new Claim("ProfilePicture", user.ProfilePicture.ToString()));
+                    await _userManager.AddClaimAsync(user, new Claim("UserName", user.UserName));
                     return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
             }

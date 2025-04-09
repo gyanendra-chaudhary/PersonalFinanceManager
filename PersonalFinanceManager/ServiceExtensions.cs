@@ -36,6 +36,7 @@ namespace PersonalFinanceManager
             var smtpSettings = configuration.GetSection("SmtpSettings").Get<SmtpSettings>();
             services.AddSingleton(smtpSettings);
             services.AddTransient<IEmailService, EmailService>();
+            services.AddHttpContextAccessor();
         }
     }
 }

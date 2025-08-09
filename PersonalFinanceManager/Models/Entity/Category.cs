@@ -7,12 +7,12 @@ namespace PersonalFinanceManager.Models.Entity
         [Key]
         public int CategoryId { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         [Required]
         public CategoryType Type { get; set; }
         [Required]
-        public string UserId { get; set; }
-        public ApplicationUser User { get; set; }
+        public string UserId { get; set; } = string.Empty;
+        public ApplicationUser User { get; set; } = new ApplicationUser();
     }
     public enum CategoryType
     {

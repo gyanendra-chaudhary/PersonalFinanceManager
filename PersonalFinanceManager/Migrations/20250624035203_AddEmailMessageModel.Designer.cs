@@ -12,8 +12,8 @@ using PersonalFinanceManager.Data;
 namespace PersonalFinanceManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250406173227_FixNullableColumns")]
-    partial class FixNullableColumns
+    [Migration("20250624035203_AddEmailMessageModel")]
+    partial class AddEmailMessageModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -167,12 +167,10 @@ namespace PersonalFinanceManager.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -181,7 +179,6 @@ namespace PersonalFinanceManager.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -226,6 +223,7 @@ namespace PersonalFinanceManager.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<decimal?>("MonthlyBudgetGoal")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("NormalizedEmail")
@@ -249,7 +247,6 @@ namespace PersonalFinanceManager.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("PostalCode")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -257,20 +254,19 @@ namespace PersonalFinanceManager.Migrations
                         .HasColumnType("bit");
 
                     b.Property<byte[]>("ProfilePicture")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<DateTime>("RegistrationDate")
+                    b.Property<DateTime?>("RegistrationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal?>("SavingsGoal")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("State")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -338,7 +334,6 @@ namespace PersonalFinanceManager.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
@@ -372,7 +367,6 @@ namespace PersonalFinanceManager.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")

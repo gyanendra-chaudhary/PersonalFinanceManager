@@ -12,19 +12,20 @@ namespace PersonalFinanceManager.Controllers
         {
             _httpContextAccessor = httpContextAccessor;
         }
-        public  AppUser GetAppUser()
+        public AppUser GetAppUser()
         {
-            var user = _httpContextAccessor.HttpContext.User;
+            var user = _httpContextAccessor?.HttpContext?.User;
+
             return new AppUser
             {
-                Id = Convert.ToInt32(user.FindFirst("Id").Value),
-                UserName = user.FindFirst("UserName").Value,
-                FullName = user.FindFirst("FullName").Value,
-                Email = user.FindFirst("Email").Value,
-                ProfilePicture = user.FindFirst("Email").Value
+                Id = Convert.ToInt32(user?.FindFirst("Id")?.Value ?? "0"),
+                UserName = user?.FindFirst("UserName")?.Value ?? "",
+                FullName = user?.FindFirst("FullName")?.Value ?? "",
+                Email = user?.FindFirst("Email")?.Value ?? "",
+                ProfilePicture = user?.FindFirst("ProfilePicture")?.Value ?? ""
             };
         }
-       
+
     }
 
 }

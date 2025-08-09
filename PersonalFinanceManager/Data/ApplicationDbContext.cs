@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using PersonalFinanceManager.Models.Entity;
+using System.Reflection.Emit;
 
 namespace PersonalFinanceManager.Data
 {
@@ -23,6 +24,11 @@ namespace PersonalFinanceManager.Data
 
             // prevent discriminator column
             builder.Entity<ApplicationUser>().ToTable("AspNetUsers");
+            builder.Entity<ApplicationUser>(entity =>
+            {
+                entity.Property(e => e.MonthlyBudgetGoal).HasPrecision(18, 2);
+                entity.Property(e => e.SavingsGoal).HasPrecision(18, 2);
+            });
 
             // category to user
             builder.Entity<Category>()

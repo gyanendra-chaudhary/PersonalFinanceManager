@@ -12,8 +12,8 @@ using PersonalFinanceManager.Data;
 namespace PersonalFinanceManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250406180853_FixApplicationUserColumnIssue")]
-    partial class FixApplicationUserColumnIssue
+    [Migration("20250531121520_DbSetup")]
+    partial class DbSetup
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

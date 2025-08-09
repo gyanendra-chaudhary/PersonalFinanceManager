@@ -34,6 +34,10 @@ namespace PersonalFinanceManager
             });
 
             var smtpSettings = configuration.GetSection("SmtpSettings").Get<SmtpSettings>();
+            if (smtpSettings == null)
+            {
+                throw new InvalidOperationException("SmtpSettings configuration section is missing or invalid.");
+            }
             services.AddSingleton(smtpSettings);
             services.AddTransient<IEmailService, EmailService>();
             services.AddHttpContextAccessor();

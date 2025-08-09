@@ -11,14 +11,14 @@ namespace PersonalFinanceManager.Models.Entity
         [Column(TypeName = "decimal(18,2)")]
         public decimal Amount { get; set; }
         public DateTime Date { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         [Required]
         public int CategoryId { get; set; }
         [ForeignKey(nameof(CategoryId))]
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
         [Required]
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
         [ForeignKey(nameof(UserId))]
-        public ApplicationUser User { get; set; }
+        public ApplicationUser? User { get; set; }
     }
 }

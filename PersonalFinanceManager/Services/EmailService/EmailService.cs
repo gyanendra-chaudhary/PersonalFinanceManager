@@ -17,30 +17,25 @@ namespace PersonalFinanceManager.Services.EmailService
 
         public async Task SendEmailAsync(string to, string subject, string body, bool isBodyHtml = false)
         {
-            var message = new EmailMessage
-            {
-                To = to,
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = isBodyHtml,
-                From = _smtpSettings.DefaultFromEmail
-            };
-
-            await SendEmailAsync(message);
+            var email = new EmailMessage(
+                to: to,
+                subject: subject,
+                body: body,
+                isBodyHtml: isBodyHtml
+            );
+            await SendEmailAsync(email);
         }
 
         public async Task SendEmailAsync(string to, string subject, string body, string from, bool isBodyHtml = false)
         {
-            var message = new EmailMessage
-            {
-                To = to,
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = isBodyHtml,
-                From = from
-            };
+            var email = new EmailMessage(
+                to: to,
+                subject:subject,
+                body: body,
+                isBodyHtml: isBodyHtml
+            );
 
-            await SendEmailAsync(message);
+            await SendEmailAsync(email);
         }
 
         public async Task SendEmailAsync(EmailMessage message)
@@ -76,7 +71,7 @@ namespace PersonalFinanceManager.Services.EmailService
 
             foreach (var attachment in message.Attachments)
             {
-                var memoryStream = new MemoryStream(attachment.Content);
+                var memoryStream = new MemoryStream(attachment.Content ?? []);
                 var mailAttachment = new Attachment(memoryStream, attachment.FileName, attachment.ContentType);
                 mailMessage.Attachments.Add(mailAttachment);
             }

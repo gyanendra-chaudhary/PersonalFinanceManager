@@ -8,39 +8,39 @@ namespace PersonalFinanceManager.Models.Entity
         [Required]
         [StringLength(50)]
         [Display(Name = "First Name")]
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
         [Required]
         [StringLength(50)]
         [Display(Name = "Last Name")]
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
         [Display(Name = "Date of Birth")]
         [DataType(DataType.Date)]
         public DateTime? DateOfBirth { get; set; }
 
         [StringLength(100)]
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
         [StringLength(50)]
-        public string City { get; set; }
+        public string? City { get; set; }
 
         [StringLength(50)]
-        public string State { get; set; }
+        public string? State { get; set; }
 
         [StringLength(20)]
         [Display(Name = "Postal Code")]
-        public string PostalCode { get; set; }
+        public string? PostalCode { get; set; }
 
         [StringLength(50)]
-        public string Country { get; set; }
+        public string? Country { get; set; }
 
         [Display(Name = "Currency Preference")]
         [StringLength(3)]
         public string CurrencyPreference { get; set; } = "USD";
 
         [Display(Name = "Profile Picture")]
-        public byte[] ProfilePicture { get; set; }
+        public byte[]? ProfilePicture { get; set; }
 
         [Display(Name = "Two Factor Enabled")]
         public bool IsTwoFactorEnabled { get; set; }

@@ -15,7 +15,7 @@ namespace PersonalFinanceManager
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             var connectionString = configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'Default Connection' not found");
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
             services.Configure<IdentityOptions>(options =>
             {

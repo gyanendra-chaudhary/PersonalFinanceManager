@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using PersonalFinanceManager.Models.Entity;
 using System.Reflection.Emit;
 

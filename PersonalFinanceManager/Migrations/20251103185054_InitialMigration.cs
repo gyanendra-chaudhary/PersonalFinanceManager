@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -6,77 +7,107 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PersonalFinanceManager.Migrations
 {
     /// <inheritdoc />
-    public partial class DbSetup : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Name = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    NormalizedName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    State = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CurrencyPreference = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
-                    ProfilePicture = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    IsTwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    NotificationPreferences = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastLoginDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    MonthlyBudgetGoal = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    SavingsGoal = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    PrefersDarkMode = table.Column<bool>(type: "bit", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    FirstName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    Address = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    City = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    State = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PostalCode = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Country = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CurrencyPreference = table.Column<string>(type: "varchar(3)", maxLength: 3, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ProfilePicture = table.Column<byte[]>(type: "longblob", nullable: true),
+                    IsTwoFactorEnabled = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    NotificationPreferences = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RegistrationDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    LastLoginDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    MonthlyBudgetGoal = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    SavingsGoal = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    PrefersDarkMode = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Email = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    NormalizedEmail = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    EmailConfirmed = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    PasswordHash = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SecurityStamp = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PhoneNumber = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetime(6)", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     AccessFailedCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    RoleId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ClaimType = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ClaimValue = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -87,17 +118,21 @@ namespace PersonalFinanceManager.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ClaimType = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ClaimValue = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -108,16 +143,21 @@ namespace PersonalFinanceManager.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    LoginProvider = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ProviderKey = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ProviderDisplayName = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -128,14 +168,17 @@ namespace PersonalFinanceManager.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RoleId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -152,16 +195,21 @@ namespace PersonalFinanceManager.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LoginProvider = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Name = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Value = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -172,17 +220,20 @@ namespace PersonalFinanceManager.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
                     CategoryId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Type = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -193,19 +244,22 @@ namespace PersonalFinanceManager.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Expenses",
                 columns: table => new
                 {
                     ExpenseId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Description = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -222,19 +276,22 @@ namespace PersonalFinanceManager.Migrations
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Incomes",
                 columns: table => new
                 {
                     IncomeId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Description = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -251,7 +308,8 @@ namespace PersonalFinanceManager.Migrations
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -262,8 +320,7 @@ namespace PersonalFinanceManager.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -289,8 +346,7 @@ namespace PersonalFinanceManager.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_UserId",
